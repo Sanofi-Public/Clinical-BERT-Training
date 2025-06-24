@@ -1,0 +1,29 @@
+{
+    "problem_type": "regression", 
+    "num_labels": 1,
+    "target_column": "TARGET",
+    "threshold": 0.8,
+    "test_size": 0.05,
+    "random_state": 42,
+    "max_length": 512,
+    "patience": 20,
+    "data_filepath": "datasets/bert/train_processed_data.parquet",
+    "test_data_filepath": "datasets/bert/test_processed_data.parquet",
+    "finetuned_model_name": "finetuned_bert_regression",
+    "pretrained_model_dir": "bert_pretrained/experiment_name/",
+    "training_args": {
+          "per_device_train_batch_size": 16,
+          "num_train_epochs": 50,
+          "learning_rate": 0.000003,
+          "logging_dir": "./logs",
+          "save_steps": 10000,
+          "logging_steps": 500,
+          "eval_steps": 2000,
+          "warmup_steps": 0,
+          "load_best_model_at_end": true,
+          "output_dir": "./output",
+          "metric_for_best_model": "eval_loss",
+          "greater_is_better": false,
+          "save_total_limit": 2
+    }
+}

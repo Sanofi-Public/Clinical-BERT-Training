@@ -1,0 +1,38 @@
+learning_rate: 0.00005
+batch_size: 6
+gradient_accumulation_steps: 1
+eval_batch_size: 6
+hidden_size: 768
+num_hidden_layers: 12
+num_attention_heads: 12
+model_flavour: "bert"
+eval_steps: 5000 # how many batches until one run over the validation set
+prediction_fraction: 0.15 # how many tokens to use for masked language modelling
+masking_fraction: 0.8 # how many of the masked language modelling tokens to replace with the mask token
+random_replacement_fraction: 0.1 # how many of the tokens for masked language modelling to replace with random words
+minimum_number_of_tokens: 20 # the smallest number of tokens allowed in the training data
+num_training_epochs: 5
+max_position_embeddings: 31229 # 85 years worth of data (?)
+min_history_size: 20 # the smallest length of medical history to be used for training.
+weight_decay: 0.001 # the weight decay 
+hidden_dropout_prob: 0.15  # Hidden layer dropout
+attention_probs_dropout_prob: 0.15  # Attention dropout
+training_partition_size: 256
+validation_partition_size: 12
+early_stop_metric: "eval_loss"
+early_stop_patience: 30
+validation_set_fraction: 0.0015 # what fraction of the dataset to monitor for early stopping
+override_maxlen: 1024 # accept lengths up to this amount
+tokens_kept_fraction: 0.9995 # keep enough tokens in the vocabulary so that 99.999% of seen tokens are known by the model. This keeps the model from bloating with a vocab too large.
+logging_steps: 500 # log the metrics every 500 training steps
+save_steps: 20000  # save every n steps
+bf16: False # reduce memory usage. This runs out of memory fairly quickly.
+num_dataloader_workers: 4
+fp16: True # reduce memory usage. This runs out of memory fairly quickly.
+warmup_steps: 0.05 # how many epochs to spend warming up the learning rate
+save_total_limit: 3
+early_stopping_delay: 0.0 # how many epochs to wait until starting to use early stopping.
+output: "./output/bert_pretraining/dataset_name/" # output dir folder
+training_data_filepath: "datasets/bert/train_processed_data.parquet"
+val_size: 0.01 # val dataset fraction
+vocab_filepath: "./datasets/bert/vocab.txt" # vocab file path; TODO: cleanup path
