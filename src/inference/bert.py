@@ -31,13 +31,14 @@ class BertInferencePipeline:
                 batch_pred = predictions.tolist()
             else:
                 predictions = self.softmax(outputs.logits).cpu().numpy()
+                batch_probas = predictions[:, 1].tolist() # Extract probabilities BEFORE thresholding
+                pred_probas.extend(batch_probas)
                 batch_pred = (predictions[:, 1] > self.config['threshold']).astype(int).tolist()
-                pred_probas.extend(batch_pred)
 
             preds.extend(batch_pred)
             
-            batch_labels = torch.squeeze(batch['labels'], axis=1).tolist()
-            labels.extend(torch.squeeze(batch['labels'], axis=1).tolist())
+            batch_labels = torch.squeeze(batch['labels']).tolist() # removed axis=1 to fix dimensionality problem
+            labels.extend(batch_labels)
 
             patient_ids.extend(batch['person_id'])
         

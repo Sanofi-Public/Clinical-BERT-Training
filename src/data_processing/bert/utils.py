@@ -22,6 +22,7 @@ def get_codes_mapping(vocab_file: str) -> Dict[str, str]:
                 icd, code = token.split(':')
             except:
                 print(token)
+                continue # fix the bug about "UnboundLocalError: local variable 'icd' referenced before assignment"
                 
             mapping[code] = icd
     

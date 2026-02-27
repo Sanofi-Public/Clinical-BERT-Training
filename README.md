@@ -30,15 +30,17 @@ git clone {url-to-sanofi-clinical-bert-training_repo.git}
 conda create -n clinicalberttraining python=3.10 -y
 ```
 
-### 4. Install dependencies
-``` 
-pip install -r requirements.txt
-```
-
-### 5. Activate the environment
+### 4. Activate the environment
 ```
 conda activate clinicalberttraining
 ```
+
+### 5. Install dependencies
+``` 
+# Navigate to the Clinical-BERT-Training directory
+pip install -r requirements.txt
+```
+
 ___________
 
 ##  BERT Usage
